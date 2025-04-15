@@ -1,18 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  query,
-  collection,
-  orderBy,
-  onSnapshot,
-  limit,
-} from "firebase/firestore";
+import { query, collection, orderBy, onSnapshot, limit } from "firebase/firestore";
 import { db } from "../firebase";
 import Message from "./Message";
 import SendMessage from "./SendMessage";
+import { useNavigate } from "react-router-dom";
 
-export function  ChatBox() {
+export function ChatBox() {
   const [messages, setMessages] = useState([]);
   const scroll = useRef();
+  const navigate = useNavigate();  // Correctly using the useNavigate hook
 
   useEffect(() => {
     const q = query(
@@ -31,21 +27,28 @@ export function  ChatBox() {
       );
       setMessages(sortedMessages);
     });
-    return () => unsubscribe;
+    
+    return () => unsubscribe();  // Cleanup the listener when component unmounts
   }, []);
+
+  const goToGames = () => {
+    navigate('/games');  // Correctly navigating to /games page
+  };
 
   return (
     <main className="chat-box">
+      <h1>Chat</h1>
+      <button onClick={goToGames}>Go to Games</button>
       <div className="messages-wrapper">
         {messages?.map((message) => (
           <Message key={message.id} message={message} />
         ))}
       </div>
-      {/* when a new message enters the chat, the screen scrolls down to the scroll div */}
+      {/* When a new message enters the chat, the screen scrolls down to the scroll div */}
       <span ref={scroll}></span>
       <SendMessage scroll={scroll} />
     </main>
   );
-};
+}
 
 export default ChatBox;
