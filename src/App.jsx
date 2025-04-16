@@ -10,12 +10,12 @@ import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 
 function App() {
-  const [user, loading] = useAuthState(auth);  // Use the auth hook to get the user state
-  const [authChecked, setAuthChecked] = useState(false);  // To track when auth state is checked
+  const [user, loading] = useAuthState(auth);  
+  const [authChecked, setAuthChecked] = useState(false);  // track when auth state is checked
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setAuthChecked(true);  // Mark that auth has been checked
+      setAuthChecked(true);  // 
     });
 
     return () => unsubscribe();  // Cleanup the listener on unmount
@@ -26,18 +26,32 @@ function App() {
   }
 
   return (
-    <>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Welcome />} />
-        {/* Only render the games page if the user is logged in */}
-        <Route path="/games" element={user ? <Games /> : <Welcome />} />
-        {/* Only render the chat page if the user is logged in */}
-        <Route path="/chat" element={user ? <ChatBox /> : <Welcome />} />
-      </Routes>
-      </>
+    <div
+      style={{
+        backgroundImage: 'url("background.jpg")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+        width: "100%",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Welcome />} />
+          <Route path="/games" element={user ? <Games user={user} /> : <Welcome />} />
+          <Route path="/chat" element={user ? <ChatBox /> : <Welcome />} />
+        </Routes>
+      </div>
+    </div>
   );
+  
 }
+
+
+
 
 export default App;
 

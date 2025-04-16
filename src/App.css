@@ -49,7 +49,7 @@ input {
   height: 30px;
   width: auto;
 }
-.sign-out {
+.sign-out, .navBtn {
   padding: 5px 10px;
   border-radius: 5px;
   color: #88dded;
@@ -119,6 +119,14 @@ input {
   width: 100%;
   padding: 20px 30px;
   background-color: #4c768d;
+  display: flex;
+}
+.chat-bubble > game-msg{
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  padding: 20px 30px;
+  background-color: pink;
   display: flex;
 }
 .send-message > input {

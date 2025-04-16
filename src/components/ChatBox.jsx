@@ -31,15 +31,13 @@ export function ChatBox() {
     return () => unsubscribe();  // Cleanup the listener when component unmounts
   }, []);
 
-  const goToGames = () => {
-    navigate('/games');  // Correctly navigating to /games page
-  };
 
   return (
     <main className="chat-box">
       <h1>Chat</h1>
-      <button onClick={goToGames}>Go to Games</button>
+      
       <div className="messages-wrapper">
+      
         {messages?.map((message) => (
           <Message key={message.id} message={message} />
         ))}
