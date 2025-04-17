@@ -12,7 +12,7 @@ body {
   font-size: 16px;
   font-family: sans-serif;
   height: 100%;
-  background: url(/src/img/background.jpg);
+  background: url(/src/img/background.jpg), url(/src/img/particles.png) repeat;
   background-size: cover;
   overflow: hidden;
   /* src\img\background.jpg */
@@ -41,11 +41,11 @@ input {
 .app-container {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
   /* justify-content: space-between;
   padding: 50px 0px; */
   position: relative;
-  width: calc(100% - 100px);
+  width: calc(100% - 150px);
   /* min-height: calc(100vh - 280px); */
   min-height: calc(100vh - 2vh);
   height: auto;
@@ -54,6 +54,7 @@ input {
   border-radius: 20px;
   overflow: hidden;
   padding-top: 60px;
+  backdrop-filter: blur(30px);
 }
 
 
@@ -69,12 +70,12 @@ input {
   color: #242443;
   height: 60px;
   position: fixed;
-  /* left: 0; */
+  left: 0;
   top: 0;
   /* width: 100%; */
-  width: calc(100% - 100px); 
+  width: calc(100%); 
   z-index: 1;
-  /* margin: 20px; */
+  margin-right: 0;
 }
 
 .sign-in {
@@ -83,7 +84,7 @@ input {
 }
 .sign-in > img {
   height: 30px;
-  width: auto;
+  width: 130px;
 }
 
 .sign-out, .navBtn {
@@ -259,8 +260,8 @@ form > .send-message{
     z-index: 2;
   position: relative;
 }
-::-webkit-scrollbar{
-  width: 12px;
+::-webkit-scrollbar{ /*add mousedown + onclick for scroll event*/
+  width: 10px;
 }
 ::-webkit-scrollbar-thumb{
   background: linear-gradient(transparent, #30ff00);

@@ -5,7 +5,6 @@ import { db } from "../firebase";
 
 export function Games({ user }) {
   const canvasRef = useRef(null);
-  const ctxRef = useRef(null); // Use ref to persist canvas context
   const scoreRef = useRef(null);
   const inputRef = useRef(null);
   const scoreRefVal = useRef(0); // Track score separately for logic
@@ -15,12 +14,13 @@ export function Games({ user }) {
   // const socket = io(); // not using socket.io anymore
   const gameWidth = 500;
   const gameHeight = 500;
-  const boardBackground = "yellow";
-  const snakeColor = "green";
-  const snakeBorder = "black";
-  const foodColor = "pink";
+  const boardBackground = "#f5dce1";
+  const snakeColor = "#7D059A";
+  const snakeBorder = "#D3D3D3";
+  const foodColor = "#F4274E";
   const unitSize = 25;
 
+  let ctx;
   let running = false;
   let xVelocity = unitSize;
   let yVelocity = 0;
@@ -36,18 +36,28 @@ export function Games({ user }) {
   ];
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (canvas) {
-      ctxRef.current = canvas.getContext("2d"); // Initialize context
-    }
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "2rem" }}>
+  {/* Score display */}
+  <div style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "1rem" }}>
+    {/* Score: <span ref={scoreRef}>{score}</span> */}
+  </div>
 
+  <canvas
+    id="gameBoard"
+    ref={canvasRef}
+    width={gameWidth}
+    height={gameHeight}
+    style={{ border: "2px solid black", backgroundColor: boardBackground }}
+  />
+</div>
+    ctx = canvasRef.current.getContext("2d");
     window.addEventListener("keydown", changeDirection); //making the listeners
     const resetBtn = document.querySelector(".btn-primary");
-    if (resetBtn) resetBtn.addEventListener("click", resetGame);
+    resetBtn.addEventListener("click", resetGame);
 
     return () => {
       window.removeEventListener("keydown", changeDirection); //calling the listeners
-      if (resetBtn) resetBtn.removeEventListener("click", resetGame);
+      resetBtn.removeEventListener("click", resetGame);
     };
   }, []);
 
@@ -80,7 +90,6 @@ export function Games({ user }) {
   }
 
   function clearBoard() {
-    const ctx = ctxRef.current;
     ctx.fillStyle = boardBackground;
     ctx.fillRect(0, 0, gameWidth, gameHeight);
   }
@@ -95,7 +104,6 @@ export function Games({ user }) {
   }
 
   function drawFood() {
-    const ctx = ctxRef.current;
     ctx.fillStyle = foodColor;
     ctx.fillRect(foodX, foodY, unitSize, unitSize);
   }
@@ -117,7 +125,6 @@ export function Games({ user }) {
   }
 
   function drawSnake() {
-    const ctx = ctxRef.current;
     ctx.fillStyle = snakeColor;
     ctx.strokeStyle = snakeBorder;
     snake.forEach(snakePart => {
@@ -180,7 +187,6 @@ export function Games({ user }) {
   }
 
   function displayGameOver() {
-    const ctx = ctxRef.current;
     ctx.font = "40px MV Boli";
     ctx.fillStyle = "black";
     ctx.textAlign = "center";
@@ -205,7 +211,7 @@ export function Games({ user }) {
         className: "snake-update-msg"
       });
     } catch (error) {
-      console.error(error);
+      console.error( error);
     }
   }
 
@@ -228,11 +234,13 @@ export function Games({ user }) {
 
   return (
     <>
+  
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "2rem" }}>
+        {/* Score display */}
         <div style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "1rem" }}>
           Score: <span ref={scoreRef}>{score}</span>
         </div>
-
+  
         {/* Game canvas */}
         <canvas
           id="gameBoard"
@@ -241,7 +249,7 @@ export function Games({ user }) {
           height={gameHeight}
           style={{ border: "2px solid black", backgroundColor: boardBackground }}
         />
-
+  
         {/* Buttons */}
         <div style={{ marginTop: "1rem" }}>
           <button className="btn btn-primary">Reset</button>
@@ -257,8 +265,9 @@ export function Games({ user }) {
           )}
         </div>
       </div>
-
+  
       <input type="hidden" id="hiddenInput" ref={inputRef} />
     </>
   );
+  
 }
