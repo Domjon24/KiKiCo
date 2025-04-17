@@ -3,16 +3,16 @@ import { query, collection, orderBy, onSnapshot, limit } from "firebase/firestor
 import { db } from "../firebase";
 import Message from "./Message";
 import SendMessage from "./SendMessage";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export function ChatBox() {
   const [messages, setMessages] = useState([]);
   const scroll = useRef();
-  const navigate = useNavigate();  // Correctly using the useNavigate hook
+  // const navigate = useNavigate();  // 
 
   useEffect(() => {
     const q = query(
-      collection(db, "messages"),
+      collection(db, "messages"), //sorts messages from server
       orderBy("createdAt", "desc"),
       limit(50)
     );
@@ -28,21 +28,19 @@ export function ChatBox() {
       setMessages(sortedMessages);
     });
     
-    return () => unsubscribe();  // Cleanup the listener when component unmounts
+    return () => unsubscribe();  // idk...
   }, []);
 
 
   return (
     <main className="chat-box">
-      <h1>Chat</h1>
-      
       <div className="messages-wrapper">
       
         {messages?.map((message) => (
           <Message key={message.id} message={message} />
         ))}
       </div>
-      {/* When a new message enters the chat, the screen scrolls down to the scroll div */}
+
       <span ref={scroll}></span>
       <SendMessage scroll={scroll} />
     </main>

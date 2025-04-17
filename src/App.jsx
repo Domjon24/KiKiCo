@@ -26,18 +26,8 @@ function App() {
   }
 
   return (
-    <div
-      style={{
-        backgroundImage: 'url("background.jpg")',
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        minHeight: "100vh",
-        width: "100%",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      <div style={{ position: "relative", zIndex: 1 }}>
+    
+      <div className="app-container">
         <NavBar />
         <Routes>
           <Route path="/" element={<Welcome />} />
@@ -45,7 +35,6 @@ function App() {
           <Route path="/chat" element={user ? <ChatBox /> : <Welcome />} />
         </Routes>
       </div>
-    </div>
   );
   
 }

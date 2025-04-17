@@ -5,6 +5,7 @@ import { db } from "../firebase";
 
 export function Games({ user }) {
   const canvasRef = useRef(null);
+  const ctxRef = useRef(null); // Use ref to persist canvas context
   const scoreRef = useRef(null);
   const inputRef = useRef(null);
   const scoreRefVal = useRef(0); // Track score separately for logic
@@ -20,7 +21,6 @@ export function Games({ user }) {
   const foodColor = "pink";
   const unitSize = 25;
 
-  let ctx;
   let running = false;
   let xVelocity = unitSize;
   let yVelocity = 0;
@@ -36,28 +36,18 @@ export function Games({ user }) {
   ];
 
   useEffect(() => {
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "2rem" }}>
-  {/* Score display */}
-  <div style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "1rem" }}>
-    {/* Score: <span ref={scoreRef}>{score}</span> */}
-  </div>
+    const canvas = canvasRef.current;
+    if (canvas) {
+      ctxRef.current = canvas.getContext("2d"); // Initialize context
+    }
 
-  <canvas
-    id="gameBoard"
-    ref={canvasRef}
-    width={gameWidth}
-    height={gameHeight}
-    style={{ border: "2px solid black", backgroundColor: boardBackground }}
-  />
-</div>
-    ctx = canvasRef.current.getContext("2d");
     window.addEventListener("keydown", changeDirection); //making the listeners
-    const resetBtn = document.querySelector(".btn-secondary");
-    resetBtn.addEventListener("click", resetGame);
+    const resetBtn = document.querySelector(".btn-primary");
+    if (resetBtn) resetBtn.addEventListener("click", resetGame);
 
     return () => {
       window.removeEventListener("keydown", changeDirection); //calling the listeners
-      resetBtn.removeEventListener("click", resetGame);
+      if (resetBtn) resetBtn.removeEventListener("click", resetGame);
     };
   }, []);
 
@@ -90,6 +80,7 @@ export function Games({ user }) {
   }
 
   function clearBoard() {
+    const ctx = ctxRef.current;
     ctx.fillStyle = boardBackground;
     ctx.fillRect(0, 0, gameWidth, gameHeight);
   }
@@ -104,6 +95,7 @@ export function Games({ user }) {
   }
 
   function drawFood() {
+    const ctx = ctxRef.current;
     ctx.fillStyle = foodColor;
     ctx.fillRect(foodX, foodY, unitSize, unitSize);
   }
@@ -125,6 +117,7 @@ export function Games({ user }) {
   }
 
   function drawSnake() {
+    const ctx = ctxRef.current;
     ctx.fillStyle = snakeColor;
     ctx.strokeStyle = snakeBorder;
     snake.forEach(snakePart => {
@@ -187,6 +180,7 @@ export function Games({ user }) {
   }
 
   function displayGameOver() {
+    const ctx = ctxRef.current;
     ctx.font = "40px MV Boli";
     ctx.fillStyle = "black";
     ctx.textAlign = "center";
@@ -208,10 +202,10 @@ export function Games({ user }) {
         avatar: user.photoURL || null,
         createdAt: serverTimestamp(),
         uid: user.uid,
-        className: "game-msg"
+        className: "snake-update-msg"
       });
     } catch (error) {
-      console.error("Failed to send score message to chat:", error);
+      console.error(error);
     }
   }
 
@@ -234,14 +228,11 @@ export function Games({ user }) {
 
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>This is the games page</h1>
-  
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "2rem" }}>
-        {/* Score display */}
         <div style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "1rem" }}>
           Score: <span ref={scoreRef}>{score}</span>
         </div>
-  
+
         {/* Game canvas */}
         <canvas
           id="gameBoard"
@@ -250,10 +241,10 @@ export function Games({ user }) {
           height={gameHeight}
           style={{ border: "2px solid black", backgroundColor: boardBackground }}
         />
-  
+
         {/* Buttons */}
         <div style={{ marginTop: "1rem" }}>
-          <button className="btn btn-secondary">Reset</button>
+          <button className="btn btn-primary">Reset</button>
           {showStart && (
             <button
               className="btn btn-primary"
@@ -266,9 +257,8 @@ export function Games({ user }) {
           )}
         </div>
       </div>
-  
+
       <input type="hidden" id="hiddenInput" ref={inputRef} />
     </>
   );
-  
 }

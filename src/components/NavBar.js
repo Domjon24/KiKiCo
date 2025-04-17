@@ -17,9 +17,7 @@ const NavBar = () => {
   const signOut = () => {
     auth.signOut();
   };
-  // const goToGames = () => {
-  //   Navigate('/games'); 
-  // };
+
 
   const goToGames = () => {
     navigate('/games'); 
