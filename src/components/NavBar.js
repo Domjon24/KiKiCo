@@ -1,5 +1,5 @@
 import React from "react";
-import GoogleSignin from "../img/btn_google_signin_dark_pressed_web.png";
+import GoogleSignin from "../img/google-login.png";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -29,7 +29,7 @@ const NavBar = () => {
   return (
     <nav className="nav-bar">
       <h1>React Chat</h1>
-      <button className="navBtn" onClick={goToGames}>Go to Games</button>
+      <button className="navBtn" onClick={goToGames}>Go to Game</button>
       <button className="navBtn" onClick={goToChat}>Go to Chat</button>
       {user ? (
         <button onClick={signOut} className="sign-out navBtn"  type="button">

@@ -7,11 +7,11 @@ export function Games({ user }) {
   const canvasRef = useRef(null);
   const scoreRef = useRef(null);
   const inputRef = useRef(null);
-  const scoreRefVal = useRef(0); // Track score separately for logic
+  const scoreRefVal = useRef(0); 
   const [score, setScore] = useState(0);
   const [showStart, setShowStart] = useState(true); // Controls visibility of Start button
 
-  // const socket = io(); // not using socket.io anymore
+  // const socket = io(); 
   const gameWidth = 500;
   const gameHeight = 500;
   const boardBackground = "#f5dce1";
@@ -27,7 +27,7 @@ export function Games({ user }) {
   let foodX;
   let foodY;
 
-  let snake = [ // body parts of snake
+  let snake = [ // body parts 
     { x: unitSize * 4, y: 0 },
     { x: unitSize * 3, y: 0 },
     { x: unitSize * 2, y: 0 },
@@ -100,7 +100,7 @@ export function Games({ user }) {
       return randNum;
     }
     foodX = randomFood(0, gameWidth - unitSize);
-    foodY = randomFood(0, gameHeight - unitSize); // Fixed from original typo (was gameWidth)
+    foodY = randomFood(0, gameHeight - unitSize); 
   }
 
   function drawFood() {

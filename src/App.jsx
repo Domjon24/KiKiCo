@@ -5,34 +5,54 @@ import NavBar from "./components/NavBar";
 import { Games } from "./Pages/games";
 import ChatBox from "./components/ChatBox";
 import { Welcome } from "./Pages/Welcome";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import { Routes, Route } from "react-router-dom";
+// import { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import CheckLogin from "./components/CheckLogin";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const [user, loading] = useAuthState(auth);  
-  const [authChecked, setAuthChecked] = useState(false);  // track when auth state is checked
+  // const [authChecked, setAuthChecked] = useState(false); 
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setAuthChecked(true);  // 
-    });
+    if (user && location.pathname === "/") {
+      navigate("/chat");
+    }
+  }, [user, location.pathname, navigate]);
 
-    return () => unsubscribe();  // Cleanup the listener on unmount
-  }, []);
 
-  if (loading || !authChecked) {
-    return <div>Loading...</div>; // Wait until auth state is fully checked
+  if (loading) {
+    return  <div>Loading...</div>;
   }
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, () => {
+  //     setAuthChecked(true);  // 
+  //   });
+
+  //   return () => unsubscribe();  
+  // }, []);
+
+  // if (loading || !authChecked) {
+  //   return <div>Loading...</div>; d
+  // }
+  
 
   return (
     
       <div className="app-container">
+        
         <NavBar />
         <Routes>
+        
           <Route path="/" element={<Welcome />} />
-          <Route path="/games" element={user ? <Games user={user} /> : <Welcome />} />
-          <Route path="/chat" element={user ? <ChatBox /> : <Welcome />} />
+          <Route path="/games" element={<CheckLogin user={user}><Games user={user} /></CheckLogin>}/>
+          {/* <Route path="/games" element={user ? <Games user={user} /> :  <Welcome />} /> */}
+          <Route path="/chat" element={<CheckLogin user={user}><ChatBox user={user} /></CheckLogin>}/>
+          {/* <Route path="/chat" element={user ? <ChatBox /> : <Welcome />} /> */}
         </Routes>
       </div>
   );
@@ -44,19 +64,3 @@ function App() {
 
 export default App;
 
-
-
-//   gsutil cors set C:\Users\DomTh\Documents\coding\fb-chatApp\fb-chatapp\cors.json cors.json gs://fb-chat-app-81ea0.firebasestorage.app
-// gsutil cors set "C:\Users\DomTh\Documents\coding\fb-chatApp\fb-chatapp\cors.json" gs://fb-chat-app-81ea0.appspot.com
-// gsutil cors set "C:\Users\DomTh\Documents\coding\fb-chatApp\fb-chatapp\cors.json" gs://fb-chat-app-81ea0.firebasestorage.app
-
-
-// const [user] = useAuthState(auth);
-// return (
-//   <div className="App">
-//     <NavBar />
-//     {!user ? <Welcome /> : <chat />}
-//   </div>
-// );
-
-// goes inside app function
