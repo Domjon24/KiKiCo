@@ -44,11 +44,15 @@ export function Welcome() {
         </div>
       <div className="subtitleDiv">
           <p>Sign in with Google, or go anonymous, to chat with your fellow React Developers.</p>
+          <br /><br /><br />
       </div>
       <div className="loginIconDiv">
+          <div className="googleLoginIconBtn">
         <button className="sign-in" onClick={googleSignIn}>
           <img src={GoogleSignin} alt="Sign in with Google" type="button" />
         </button>
+      </div>
+      
 
         <button className="sign-in" onClick={anonymousSignIn}>
           <img src={EmailSignin} alt="Sign in anonymously" type="button" />
