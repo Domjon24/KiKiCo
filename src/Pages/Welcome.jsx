@@ -31,20 +31,15 @@ export function Welcome() {
   return (
 
     <main className="welcome">
-      <div className="titleDiv">
+      <div className="main-content-left">
         <div className="titleTextDiv">
-          <h2>Welcome to<br />React Chat</h2>
-          {/* <h2>React chat. </h2> */}
+          <h2>Welcome to React Chat</h2>
+          {/* <br /><h2>React chat. </h2> */}
         </div>
-        <div className="imageDiv">
-          <div className="imgBx">
-              <img id="girl" src={loginPic} />
-            </div>
-          </div>
-        </div>
+        
+        {/* </div> */}
       <div className="subtitleDiv">
           <p>Sign in with Google, or go anonymous, to chat with your fellow React Developers.</p>
-          <br /><br /><br />
       </div>
       <div className="loginIconDiv">
           <div className="googleLoginIconBtn">
@@ -58,6 +53,14 @@ export function Welcome() {
           <img src={EmailSignin} alt="Sign in anonymously" type="button" />
         </button>
       </div>
+      </div>
+
+      <div className="main-content-right ">
+          <div className="imgBx">
+              <img id="girl" src={loginPic} />
+            </div>
+          </div>
+
     </main>
   );
 }

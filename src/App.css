@@ -44,8 +44,8 @@ input {
 } */
 
 .app-container {
-  background-color: #f0e9d6c4;
-  /* background-color: #3c3c3c99; */
+  /* background-color: #f0e9d6c4; */
+  background-color: #f5f2f2;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,21 +109,38 @@ input {
 .welcome {
   display: flex;
   flex-wrap:wrap;
+  justify-content: space-between;
+  align-items: center;
   padding: 30px;
-  text-align: center;
+  text-align: left;
   margin-top: 40px;
   color: #D6DDF0;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 500;
+}
+
+.main-content-left, .main-content-right{
+  display: flex;
+  flex: 1 1 50%;
+  max-width: 50%;
+  box-sizing: border-box;
+  flex-direction: column;
   justify-content: center;
+  height: 100%;
+  padding: 20px;
+}
+.main-content-right{
+
+}
+.main-content-left{
 }
 .subtitleDiv{
-  padding: 0 150px;
+  /* padding: 0 150px; */
   font-size: x-large;
 }
 .loginIconDiv{
   padding: 0 auto;
-  justify-content: space-between;
+  justify-content:space-evenly;
 }
 .loginIconDiv > img{
   border: 1px solid #1c2c4c;
@@ -139,12 +156,14 @@ input {
 }
 
   .imgBx img{
-   /* flex-grow: 2; */
-   padding-left: 0;
+   /* padding-left: 0;
    padding-right: 10px;
    margin-left: 0;
   max-width: 300px;
-  max-height: 300px;
+  max-height: 300px; */
+  max-width: 100%;
+  height: auto;
+  max-height: 400px;
   }
 
   #girl{
@@ -352,7 +371,7 @@ form > .send-message{
   z-index: 2;
   position: relative;
 }
-::-webkit-scrollbar{ /*add mousedown + onclick for scroll event*/
+::-webkit-scrollbar{ 
   width: 10px;
 }
 ::-webkit-scrollbar-thumb{
@@ -364,5 +383,6 @@ form > .send-message{
 }
 body{
   margin-top: 5px;
+  /* margin-bottom: 5px; */
 }
 
