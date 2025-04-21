@@ -38,11 +38,11 @@ const NavBar = () => {
           Sign Out
         </button>
       ) : (
-        <button className="sign-in">
+        <button className="sign-in welcome-signIn">
           <img
             onClick={googleSignIn}
             src={GoogleSignin}
-            alt="sign in with google"
+            alt="sign in with google" style={{ height: "40px", alignContent: "center" }}
             type="button"
           />
         </button>
