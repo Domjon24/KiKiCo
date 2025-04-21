@@ -4,6 +4,7 @@ import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
+import kikico from "../img/kikico-cropped.svg"
 
 const NavBar = () => {
   const [user] = useAuthState(auth);
@@ -28,7 +29,8 @@ const NavBar = () => {
 
   return (
     <nav className="nav-bar">
-      <h1>React Chat</h1>
+      {/* <h1>React Chat</h1> */}
+      <img src={kikico} className="kikicoLogo" />
       <button className="navBtn" onClick={goToGames}>Go to Game</button>
       <button className="navBtn" onClick={goToChat}>Go to Chat</button>
       {user ? (

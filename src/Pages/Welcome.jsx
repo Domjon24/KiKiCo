@@ -4,6 +4,7 @@ import { GoogleAuthProvider, signInWithRedirect, signInAnonymously, signInWithPo
 import GoogleSignin from "../img/google-login.png";
 import EmailSignin from "../img/anon-icon.png";
 import loginPic from "../img/welcom-model-edit.jpg"
+import kikico from "../img/kikico.svg"
 
 
 export function Welcome() {
@@ -33,8 +34,8 @@ export function Welcome() {
     <main className="welcome">
       <div className="main-content-left">
         <div className="titleTextDiv">
-          <h2>Welcome to React Chat</h2>
-          {/* <br /><h2>React chat. </h2> */}
+          {/* <h2>KiKiCo</h2> */}
+          <img src={kikico} id="kikicoMainWelcome" />
         </div>
         
         {/* </div> */}
