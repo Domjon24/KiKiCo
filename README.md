@@ -22,4 +22,10 @@ Login to join the chatroom. There are 2 ways to log in, Google login, or anonymo
   </p>
 <h3>Backend:</h3>
 <p>Authentication & storage servers are handled using google firebase.</p>
-  
+<br>
+<h1>Error handling & bugs</h1>
+<p>You will not be able to chat or play until you log in. If there are any authentication errors, or you try to enter any website components without being signed in, you will get this error</p>
+![image](https://github.com/user-attachments/assets/575510b2-42cb-49ec-95a3-34da73b2ffa4)
+
+
+<h4>There is currently a bug that sends all error messages & game update notifications fixed. Hopefully it will get resolved in the next commit</h4>
