@@ -30,17 +30,17 @@ export function Welcome() {
         </div>
 
         <div className="sign-in-welcome">
-          <p>Sign in with Google, or go anonymous, to chat with your fellow React Developers.</p>
+          <p>Sign in with Google, or go anonymous, to join the chatroom. Don't forget to check out the game room!</p>
         </div>
 
         <div className="loginIconDiv">
           <button className="btn-primary googleLoginIconBtn" onClick={googleSignIn}>
-            <img src={GoogleSignin} alt="Google Sign-In" style={{ height: "40px", marginRight: "10px" }} />
+            <img src={GoogleSignin} alt="Google Sign-In" style={{ height: "30px", marginRight: "10px" }} />
             Sign in with Google
           </button>
 
           <button className="btn-primary anonLoginBtn" onClick={anonymousSignIn}>
-            <img src={EmailSignin} alt="Anonymous Sign-In" style={{ height: "40px", marginRight: "10px" }} />
+            <img src={EmailSignin} alt="Anonymous Sign-In" style={{ height: "30px", marginRight: "10px" }} />
             Sign in Anonymously
           </button>
         </div>

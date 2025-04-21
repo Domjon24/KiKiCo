@@ -5,10 +5,6 @@
   margin: 0;
   padding: 0;
 }
-.background{
-  filter: blur(95px);
-  z-index: -1;
-}
 
 
 .montserrat body{
@@ -24,10 +20,10 @@ body {
   font-size: 16px;
   font-family: sans-serif;
   height: 100%;
-  background: url(/src/img/background.jpg) repeat;
+  background: url(/src/img/bacground3.png) repeat;
   background-size: cover;
   overflow: hidden;
-  
+  backdrop-filter: blur(35px);
   /* src\img\background.jpg */
   /* background-color: darkgoldenrod; */
 }
@@ -53,7 +49,7 @@ input {
 
 .app-container {
   /* background-color: #f0e9d6c4; */
-  background-color: #f5f2f2;
+  background-color: #ffffff83;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -65,12 +61,15 @@ input {
   min-height: calc(100vh - 2vh);
   min-width: 630px;
   height: auto;
-  box-shadow: 0 15px 35px rgba(255, 255, 255, 0.05);
+  /* box-shadow: 0 15px 35px rgba(255, 255, 255, 0.192); */
   margin: auto;
   border-radius: 20px;
   overflow: hidden;
   /* padding: auto; */
-  backdrop-filter: blur(30px);
+  backdrop-filter: blur(25px);
+  border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+border: 1px solid rgba(255, 255, 255, 0.44);
 }
 
 
@@ -163,7 +162,7 @@ input {
   width: 100%;
   height: auto;
   object-fit: contain; */
-  height: 35vh;
+  height: 30vh;
   width: auto;
   padding: 10px;
 }
@@ -197,13 +196,6 @@ input {
      }
       
     
-  
-  
-    
-
-
-
-
 h2{
   flex-grow: 1;
   /* text-align:start;
@@ -244,7 +236,7 @@ canvas {
   font-weight: 600;
   color: #41403e;
   text-align: center;
-  margin: 20px 0;
+  margin: 15px 0;
   max-width: 90%;
   line-height: 1.5;
 }
@@ -421,25 +413,25 @@ form > .send-message{
 }
 .googleLoginIconBtn, .anonLoginBtn {
   width: 100%;
-  height: 80px;
+  height: 60px;
   max-width: 300px;
-  margin-bottom: 15px;
+  margin: 5px 10px;
   font-family: Neucha, sans-serif;
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 2vh;
   align-self: center;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding-top: 2vh;
+  padding-top: 2.5vh;
 }
 
 .loginIconDiv {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   width: 90%;
   max-width: 400px;
   margin: 0 auto;
@@ -476,14 +468,14 @@ form > .send-message{
 }
 
 ::-webkit-scrollbar{ 
-  width: 10px;
+  width: 15px;
 }
 ::-webkit-scrollbar-thumb{
-  background: linear-gradient(transparent, #FF6208);
-  border-radius: 6px;
+  background: linear-gradient(transparent, #0b003a);
+  border-radius: 16px;
 }
 ::-webkit-scrollbar-thumb:hover{
-  background: linear-gradient(transparent, #38024F);
+  background: linear-gradient(transparent, #515052);
 }
 body{
   margin-top: 5px;

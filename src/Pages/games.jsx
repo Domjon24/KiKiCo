@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 // import style from "./games.css";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
+import scoreIcon from "../img/score.svg";
 
 export function Games({ user }) {
   const canvasRef = useRef(null);
@@ -21,6 +22,7 @@ export function Games({ user }) {
   const unitSize = 25;
 
   let ctx;
+  const ctxRef = useRef(null);
   let running = false;
   let xVelocity = unitSize;
   let yVelocity = 0;
@@ -50,7 +52,7 @@ export function Games({ user }) {
     style={{ border: "2px solid black", backgroundColor: boardBackground }}
   />
 </div>
-    ctx = canvasRef.current.getContext("2d");
+    // ctx = canvasRef.current.getContext("2d"); //was throwin error when starting game
     window.addEventListener("keydown", changeDirection); //making the listeners
     const resetBtn = document.querySelector(".btn-primary");
     resetBtn.addEventListener("click", resetGame);
@@ -62,6 +64,7 @@ export function Games({ user }) {
   }, []);
 
   function gameStart() {
+    ctx = canvasRef.current.getContext("2d");
     running = true;
     scoreRefVal.current = 0;
     setScore(0);
@@ -235,36 +238,89 @@ export function Games({ user }) {
   return (
     <>
   
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "2rem" }}>
-        {/* Score display */}
+      <div style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "2rem",
+        gap: "2rem", 
+      }}>
+        {/* Score display
         <div style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "1rem" }}>
           Score: <span ref={scoreRef}>{score}</span>
-        </div>
+        </div> */}
   
         {/* Game canvas */}
         <canvas
-          id="gameBoard"
-          ref={canvasRef}
-          width={gameWidth}
-          height={gameHeight}
-          style={{ border: "2px solid black", backgroundColor: boardBackground }}
-        />
+        id="gameBoard"
+        ref={canvasRef}
+        width={gameWidth}
+        height={gameHeight}
+        style={{
+          border: "2px solid black",
+          backgroundColor: boardBackground,
+        }}
+      />
   
-        {/* Buttons */}
-        <div style={{ marginTop: "1rem" }}>
-          <button className="btn btn-primary">Reset</button>
-          {showStart && (
-            <button
-              className="btn btn-primary"
-              id="startBtn"
-              onClick={gameStart}
-              style={{ marginLeft: "1rem" }}
+      {/* Score display */}
+      {/* <div
+              style={{
+                fontSize: "24px",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
             >
-              Start
-            </button>
-          )}
+              Score<br /> <span ref={scoreRef}>{score}</span>
+            </div> */}
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "10vh",
+            maxHeight: "80px",
+          }}
+        >
+          <img
+            src={scoreIcon}
+            alt="Score"
+            style={{
+              height: "auto",
+              width: "11vw",
+              maxHeight: "100%",
+            }}
+          />
+          <span
+            ref={scoreRef}
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+              marginTop: "0.5rem",
+            }}
+          >
+            {score}
+          </span>
         </div>
-      </div>
+
+
+        </div>
+
+        {/* Buttons */}
+        <div style={{ marginTop: "1rem", textAlign: "center" }}>
+      <button className="btn btn-primary">Reset</button>
+      {showStart && (
+        <button
+          className="btn btn-primary"
+          id="startBtn"
+          onClick={gameStart}
+          style={{ marginLeft: "1rem" }}
+        >
+          Start
+        </button>
+      )}
+    </div>
   
       <input type="hidden" id="hiddenInput" ref={inputRef} />
     </>

@@ -42,7 +42,7 @@ const NavBar = () => {
           <img
             onClick={googleSignIn}
             src={GoogleSignin}
-            alt="sign in with google" style={{ height: "40px", alignContent: "center" }}
+            alt="sign in with google" style={{ height: "35px", width: "30px", paddingBottom: "30%" }}
             type="button"
           />
         </button>
