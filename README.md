@@ -1,6 +1,6 @@
 <h1>Project Overview</h1>
 
-KiKiCo is a real-time chatroom site. The main pages are the chatroom, and the game room. To start using this website, you must first either Sign-Up with google, or sign up anonymously. When you log in, you're re-directed to the chatroom that updates in real-time. You can also go to the game tab and play snake. Scores are automatically updated in the chat.
+KiKiCo is a real-time chatroom site. The main pages are the chatroom, and the game room. To start using this website, you must first either Sign-Up with google, or sign up anonymously. When you log in, you're re-directed to the chatroom that updates in real-time. You can also go to the game tab and play snake. Scores are automatically updated in the chat. https://fb-chat-app-81ea0.firebaseapp.com/chat
 
 ![image](https://github.com/user-attachments/assets/4f02292c-e6f0-48ce-be77-1e5ea9be14bf)
 
